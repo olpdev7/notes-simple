@@ -1,0 +1,14 @@
+.note-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 64px;
+
+    .note-icon {
+        margin-right: 16px;
+    }
+
+    .note-menu {
+        margin-left: auto;
+    }
+}

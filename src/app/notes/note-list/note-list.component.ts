@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+import { NotesService } from '@app-data/services';
+import { Note } from '@app-data/models';
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-note-list',
   templateUrl: './note-list.component.html',
@@ -7,9 +11,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NoteListComponent implements OnInit {
 
-  constructor() { }
+  items$: Observable<Note[]>;
+
+  constructor(private notesService: NotesService) { }
 
   ngOnInit(): void {
+    this.items$ = this.notesService.getNotes();
   }
 
 }

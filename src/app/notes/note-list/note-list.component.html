@@ -1,1 +1,20 @@
-<p>note-list works!</p>
+<ng-container *ngIf="items$ | async as items">
+    <mat-paginator [length]="items.length" [pageSize]="10" [pageSizeOptions]="[10, 25]">
+    </mat-paginator>
+    <mat-list>
+        <mat-list-item *ngFor="let item of items">
+            <div class="note-item">
+                <mat-icon class="note-icon">note</mat-icon>
+                <span>{{item.title}}</span>
+                <button class="note-menu" mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item>
+                        <span>Remove</span>
+                    </button>
+                </mat-menu>
+            </div>
+        </mat-list-item>
+    </mat-list>
+</ng-container>
