@@ -37,12 +37,20 @@ export class ForInMemoryInterceptor implements HttpInterceptor {
   }
 
   private imitatePagination(req: HttpRequest<any>, event: HttpResponse<any>) {
-    const page = +req.params.get('page');
     const pageSize = +req.params.get('pageSize');
-    const start = page * pageSize;
+    const totalSize = event.body.length;
+    let page = +req.params.get('page');
+    let start = page * pageSize;
+
+    if (start >= totalSize) {
+      page = Math.trunc(totalSize / pageSize) - 1;
+      page < 0 ? 0 : page;
+      start = page * pageSize;
+    }
+
     const body: PaginatedResponse = {
       page,
-      totalSize: event.body.length,
+      totalSize,
       children: event.body.slice(start, start + pageSize)
     }
 

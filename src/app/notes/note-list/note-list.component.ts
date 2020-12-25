@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
-import { filter, switchMap } from 'rxjs/operators';
+import { filter, switchMap, tap } from 'rxjs/operators';
 
 import { NotesService } from '@app-data/services';
 import { GetNotesOptions, Note, NotesResponse } from '@app-data/models';
@@ -20,8 +20,8 @@ export class NoteListComponent implements OnInit {
   paginatedItems$: Observable<NotesResponse>;
   paginationOptions = {
     pageIndex: 0,
-    pageSize: 5,
-    pageSizeOptions: [5]
+    pageSize: 2,
+    pageSizeOptions: [2]
   };
 
 
@@ -58,7 +58,8 @@ export class NoteListComponent implements OnInit {
 
   private loadData(): void {
     const options = this.getRequestOptions();
-    this.paginatedItems$ = this.notesService.getNotes(options);
+    this.paginatedItems$ = this.notesService.getNotes(options)
+      .pipe(tap(notes => this.paginationOptions.pageIndex = notes.page));
   }
 
   private getRequestOptions(): GetNotesOptions {
