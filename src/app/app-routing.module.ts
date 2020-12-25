@@ -15,7 +15,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'welcome',
+    redirectTo: 'notes',
     pathMatch: 'full'
   },
   {

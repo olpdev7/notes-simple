@@ -12,7 +12,8 @@ export class AddNoteFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.addNoteForm = this.fb.group({
-      title: ['', [Validators.required]]
+      title: ['', [Validators.required]],
+      description: ['']
     });
   }
 

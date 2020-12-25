@@ -2,6 +2,7 @@
     <button class="note-add-btn" mat-icon-button (click)="addNote()">
         <mat-icon>add</mat-icon>
     </button>
+
     <mat-paginator 
         [length]="items.totalSize" 
         [pageIndex]="paginationOptions.pageIndex"
@@ -9,14 +10,18 @@
         [pageSizeOptions]="paginationOptions.pageSizeOptions"
         (page)="onPagination($event)">
     </mat-paginator>
-    <mat-list>
+
+    <mat-list class="note-list">
         <mat-list-item *ngFor="let item of items.children">
-            <div class="note-item">
-                <mat-icon class="note-icon">note</mat-icon>
-                <span>{{item.title}}</span>
-                <button class="note-menu" mat-icon-button [matMenuTriggerFor]="menu">
-                    <mat-icon>more_vert</mat-icon>
-                </button>
+            <div class="note-item-container">
+                <div matLine class="note-item-row">
+                    <mat-icon matListIcon class="note-icon">note</mat-icon>
+                    <span>{{item.title}}</span>
+                    <button class="note-menu" mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                </div>
+                <div matLine class="note-item-row description">{{item.description}}</div>
                 <mat-menu #menu="matMenu">
                     <button mat-menu-item (click)="removeNote(item)">
                         <span>Remove</span>

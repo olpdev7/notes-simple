@@ -10,11 +10,8 @@ export class InMemoryDataService implements InMemoryDbService {
     static idCounter = 0;
 
     createDb() {
-        const notes: Note[] = [
-            { id: ++InMemoryDataService.idCounter, title: 'Note 111111111111111111111 111111111111111111111 111111111111111111111111' },
-            { id: ++InMemoryDataService.idCounter, title: 'Note 2' },
-            { id: ++InMemoryDataService.idCounter, title: 'Note 3' },
-        ];
+        const notes: Note[] = Array.from(Array(5))
+            .map(n => ({ id: ++InMemoryDataService.idCounter, title: `Pregenerated note ${InMemoryDataService.idCounter}` }));
         return { notes };
     }
 

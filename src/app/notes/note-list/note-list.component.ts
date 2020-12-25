@@ -19,8 +19,8 @@ export class NoteListComponent implements OnInit {
   paginatedItems$: Observable<NotesResponse>;
   paginationOptions = {
     pageIndex: 0,
-    pageSize: 2,
-    pageSizeOptions: [2]
+    pageSize: 5,
+    pageSizeOptions: [5]
   };
 
   constructor(private notesService: NotesService, private matDialog: MatDialog) { }

@@ -11,7 +11,7 @@ import { ForInMemoryInterceptor } from './for-in-memory-interceptor';
   imports: [
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false, delay: 500 }
+      InMemoryDataService, { dataEncapsulation: false, delay: 250 }
     ),
     CommonModule
   ],
