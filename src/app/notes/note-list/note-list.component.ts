@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { PageEvent } from '@angular/material/paginator';
 
 import { NotesService } from '@app-data/services';
-import { Note } from '@app-data/models';
-import { Observable } from 'rxjs';
+import { GetNotesOptions, GetNotesResponse } from '@app-data/models';
 
 @Component({
   selector: 'app-note-list',
@@ -10,13 +11,27 @@ import { Observable } from 'rxjs';
   styleUrls: ['./note-list.component.scss']
 })
 export class NoteListComponent implements OnInit {
-
-  items$: Observable<Note[]>;
+  paginatedItems$: Observable<GetNotesResponse>;
+  paginationOptions = {
+    pageIndex: 0,
+    pageSize: 2,
+    pageSizeOptions: [2]
+  };
 
   constructor(private notesService: NotesService) { }
 
   ngOnInit(): void {
-    this.items$ = this.notesService.getNotes();
+    const options = this.getRequestOptions();
+    this.paginatedItems$ = this.notesService.getNotes(options);
   }
 
+  onPagination(pageEvent: PageEvent) {
+    this.paginationOptions.pageIndex = pageEvent.pageIndex;
+    const options = this.getRequestOptions();
+    this.paginatedItems$ = this.notesService.getNotes(options);
+  }
+
+  private getRequestOptions(): GetNotesOptions {
+    return { page: this.paginationOptions.pageIndex, pageSize: this.paginationOptions.pageSize };
+  }
 }

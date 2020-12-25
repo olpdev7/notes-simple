@@ -1,8 +1,13 @@
-<ng-container *ngIf="items$ | async as items">
-    <mat-paginator [length]="items.length" [pageSize]="10" [pageSizeOptions]="[10, 25]">
+<ng-container *ngIf="paginatedItems$ | async as items">
+    <mat-paginator 
+        [length]="items.totalSize" 
+        [pageIndex]="paginationOptions.pageIndex"
+        [pageSize]="paginationOptions.pageSize"
+        [pageSizeOptions]="paginationOptions.pageSizeOptions"
+        (page)="onPagination($event)">
     </mat-paginator>
     <mat-list>
-        <mat-list-item *ngFor="let item of items">
+        <mat-list-item *ngFor="let item of items.children">
             <div class="note-item">
                 <mat-icon class="note-icon">note</mat-icon>
                 <span>{{item.title}}</span>
