@@ -15,15 +15,13 @@ import { AddNoteFormComponent } from '../add-note-form/add-note-form.component';
 })
 export class NoteListComponent implements OnInit {
   @ViewChild('confirmDelete') confirmDeleteTemplate;
-  @ViewChild('addNoteTemplate') addNoteTemplate;
-
+  
   paginatedItems$: Observable<NotesResponse>;
   paginationOptions = {
     pageIndex: 0,
     pageSize: 2,
     pageSizeOptions: [2]
   };
-
 
   constructor(private notesService: NotesService, private matDialog: MatDialog) { }
 

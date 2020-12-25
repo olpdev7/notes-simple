@@ -27,9 +27,15 @@
 }
 
 .dialog-container {
-    // text-align: center;
-
     h1 {
         word-break: break-all;
     }
+}
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100vh - 64px);
 }

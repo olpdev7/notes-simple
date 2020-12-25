@@ -14,6 +14,11 @@ const routes: Routes = [
     loadChildren: () => import('./notes/notes.module').then(m => m.NotesModule)
   },
   {
+    path: '',
+    redirectTo: 'welcome',
+    pathMatch: 'full'
+  },
+  {
     path: '**',
     component: NotFoundComponent
   }
