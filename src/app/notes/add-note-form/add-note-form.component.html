@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Add new note</h1>
+<div [formGroup]="addNoteForm" class="note-form" mat-dialog-content>
+    <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput></textarea>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [disabled]="!addNoteForm.valid" [mat-dialog-close]="addNoteForm.value">Save</button>
+</div>

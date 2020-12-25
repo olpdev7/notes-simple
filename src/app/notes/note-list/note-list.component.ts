@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
+import { filter, switchMap } from 'rxjs/operators';
 
 import { NotesService } from '@app-data/services';
-import { GetNotesOptions, GetNotesResponse } from '@app-data/models';
+import { GetNotesOptions, Note, NotesResponse } from '@app-data/models';
+import { AddNoteFormComponent } from '../add-note-form/add-note-form.component';
 
 @Component({
   selector: 'app-note-list',
@@ -11,22 +14,49 @@ import { GetNotesOptions, GetNotesResponse } from '@app-data/models';
   styleUrls: ['./note-list.component.scss']
 })
 export class NoteListComponent implements OnInit {
-  paginatedItems$: Observable<GetNotesResponse>;
+  @ViewChild('confirmDelete') confirmDeleteTemplate;
+  @ViewChild('addNoteTemplate') addNoteTemplate;
+
+  paginatedItems$: Observable<NotesResponse>;
   paginationOptions = {
     pageIndex: 0,
-    pageSize: 2,
-    pageSizeOptions: [2]
+    pageSize: 5,
+    pageSizeOptions: [5]
   };
 
-  constructor(private notesService: NotesService) { }
+
+  constructor(private notesService: NotesService, private matDialog: MatDialog) { }
 
   ngOnInit(): void {
-    const options = this.getRequestOptions();
-    this.paginatedItems$ = this.notesService.getNotes(options);
+    this.loadData();
   }
 
   onPagination(pageEvent: PageEvent) {
     this.paginationOptions.pageIndex = pageEvent.pageIndex;
+    this.loadData();
+  }
+
+  removeNote(note: Note): void {
+    this.matDialog.open(this.confirmDeleteTemplate, {
+      data: { note }
+    })
+      .afterClosed()
+      .pipe(
+        filter(Boolean),
+        switchMap(() => this.notesService.removeNote(note.id))
+      ).subscribe(() => this.loadData())
+  }
+
+  addNote(): void {
+    this.matDialog.open(AddNoteFormComponent)
+      .afterClosed()
+      .pipe(
+        filter(Boolean),
+        switchMap((note: Note) => this.notesService.addNote(note))
+      ).subscribe(() => this.loadData())
+  }
+
+  private loadData(): void {
     const options = this.getRequestOptions();
     this.paginatedItems$ = this.notesService.getNotes(options);
   }

@@ -1,4 +1,7 @@
 <ng-container *ngIf="paginatedItems$ | async as items">
+    <button class="note-add-btn" mat-icon-button (click)="addNote()">
+        <mat-icon>add</mat-icon>
+    </button>
     <mat-paginator 
         [length]="items.totalSize" 
         [pageIndex]="paginationOptions.pageIndex"
@@ -15,7 +18,7 @@
                     <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu">
-                    <button mat-menu-item>
+                    <button mat-menu-item (click)="removeNote(item)">
                         <span>Remove</span>
                     </button>
                 </mat-menu>
@@ -23,3 +26,19 @@
         </mat-list-item>
     </mat-list>
 </ng-container>
+
+<ng-template #confirmDelete let-data>
+    <div class="dialog-container">
+        <h1 mat-dialog-title>Remove {{data.note.title}}</h1>
+        <div mat-dialog-content>You want to delete note</div>
+        <div mat-dialog-actions>
+            <button mat-button mat-dialog-close>Cancel</button>
+            <button mat-button  [mat-dialog-close]="true">Delete</button>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #addNoteTemplate>
+    test test test
+    <add-note-form></add-note-form>
+</ng-template>

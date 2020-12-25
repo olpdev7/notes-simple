@@ -1,3 +1,16 @@
+.note-add-btn {
+    position: absolute;
+    right: 16px;
+    top: 0;
+    width: 64px;
+    height: 64px;
+    color: white;
+
+    mat-icon {
+        width: 100%;
+        font-size: 32px;
+    }
+}
 .note-item {
     display: flex;
     align-items: center;
@@ -10,5 +23,13 @@
 
     .note-menu {
         margin-left: auto;
+    }
+}
+
+.dialog-container {
+    // text-align: center;
+
+    h1 {
+        word-break: break-all;
     }
 }

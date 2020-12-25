@@ -6,6 +6,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 export const materialResources = [
   MatToolbarModule,
@@ -13,7 +16,10 @@ export const materialResources = [
   MatPaginatorModule,
   MatIconModule,
   MatMenuModule,
-  MatButtonModule
+  MatButtonModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule
 ];
 
 @NgModule({

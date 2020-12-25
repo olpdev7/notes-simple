@@ -6,6 +6,8 @@ export interface PaginatedResponse {
     children: any[];
 }
 
-export interface GetNotesResponse extends PaginatedResponse {
+export interface NotesResponse extends PaginatedResponse {
     children: Note[];
 }
+
+export interface NoteResponse extends Note {}
