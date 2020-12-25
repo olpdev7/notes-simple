@@ -1,0 +1,7 @@
+:host {
+    --note-add-btn-color: white;
+}
+
+:host-context(body.another-theme) {
+    --note-add-btn-color: red;    
+}

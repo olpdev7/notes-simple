@@ -1,10 +1,14 @@
+@import './note-list.palette.scss';
+
+$toolbar-height: 64px;
+
 .note-add-btn {
     position: absolute;
     right: 16px;
     top: 0;
-    width: 64px;
-    height: 64px;
-    color: white;
+    width: $toolbar-height;
+    height: $toolbar-height;
+    color: var(--note-add-btn-color);
 
     mat-icon {
         width: 100%;
@@ -37,5 +41,5 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: calc(100vh - 64px);
+    height: calc(100vh - #{$toolbar-height});
 }

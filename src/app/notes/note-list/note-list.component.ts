@@ -15,7 +15,7 @@ import { AddNoteFormComponent } from '../add-note-form/add-note-form.component';
 })
 export class NoteListComponent implements OnInit {
   @ViewChild('confirmDelete') confirmDeleteTemplate;
-  
+
   paginatedItems$: Observable<NotesResponse>;
   paginationOptions = {
     pageIndex: 0,
